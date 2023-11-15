@@ -37,7 +37,7 @@ for(let i of btns){
                 secondNum = +displayVal;
                 displayVal = operate(operation, firstNum, secondNum);
                 firstNum = displayVal;
-                display.innerHTML = Math.round(displayVal * 10000000000) / 10000000000;
+                display.innerHTML = Math.round(displayVal * 100000000) / 100000000;
                 clear();
             }
         }else{
@@ -51,14 +51,14 @@ function setOperation(sign){
         operation = sign;
         firstNum = +displayVal;
         displayVal = null;
-        display.innerHTML = displayVal;
+        //display.innerHTML = displayVal;
 
     }else{
         secondNum = +displayVal;
         displayVal = operate(operation, firstNum, secondNum);
         firstNum = +displayVal;
         secondNum = 0;
-        display.innerHTML = Math.round(displayVal * 10000000000) / 10000000000;
+        display.innerHTML = Math.round(displayVal * 100000000) / 100000000;
         operation = sign;
         displayVal = null;
     }
