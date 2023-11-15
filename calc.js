@@ -27,27 +27,44 @@ for(let i of btns){
             (displayVal == null) ?  displayVal = i.value: displayVal += i.value;
             display.innerHTML = displayVal;
         }else if (i.value == "clear"){
-            displayVal = null;
             display.innerHtml = null;
-            operation = "";
-            firstNum = 0;
-            secondNum = 0;
+            clear();
         }else if (i.value == "="){
-            secondNum = displayVal;
-            console.log('idk');
-            displayVal = operate(operation, firstNum, secondNum);
-            firstNum = displayVal;
-            display.innerHTML = displayVal;
-        }else if (operation == ""){
+            if(displayVal != undefined){
+                secondNum = +displayVal;
+                displayVal = operate(operation, firstNum, secondNum);
+                firstNum = displayVal;
+                display.innerHTML = Math.round(displayVal * 10000000000) / 10000000000;
+                clear();
+            }
+        }else{
             setOperation(i.value);
         }
     });
 };
 
 function setOperation(sign){
-    operation = sign;
-    firstNum = +displayVal;
+    if(operation == ""){
+        operation = sign;
+        firstNum = +displayVal;
+        displayVal = null;
+        display.innerHTML = displayVal;
+        console.log("working");
+    }else{
+        secondNum = +displayVal;
+        displayVal = operate(operation, firstNum, secondNum);
+        firstNum = +displayVal;
+        secondNum = 0;
+        display.innerHTML = Math.round(displayVal * 10000000000) / 10000000000;
+        operation = sign;
+        displayVal = null;
+        console.log("other working");
+    }
+}
+
+function clear(){
     displayVal = null;
-    display.innerHTML = displayVal;
-    console.log("working");
+    operation = "";
+    // firstNum = 0;
+    // secondNum = 0;
 }
