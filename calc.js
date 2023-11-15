@@ -17,7 +17,9 @@ function operate(operation, a, b){
             return a * b;
             break;
         case "÷":
-            return a / b;
+            if(b==0){
+                return 58008;
+            }else{return a / b;}
     }
 };
 
@@ -27,10 +29,11 @@ for(let i of btns){
             (displayVal == null) ?  displayVal = i.value: displayVal += i.value;
             display.innerHTML = displayVal;
         }else if (i.value == "clear"){
-            display.innerHtml = null;
             clear();
+            firstNum = 0;
+            display.innerHTML = 0;
         }else if (i.value == "="){
-            if(displayVal != undefined){
+            if(displayVal != null && operation != ""){
                 secondNum = +displayVal;
                 displayVal = operate(operation, firstNum, secondNum);
                 firstNum = displayVal;
@@ -49,7 +52,7 @@ function setOperation(sign){
         firstNum = +displayVal;
         displayVal = null;
         display.innerHTML = displayVal;
-        console.log("working");
+
     }else{
         secondNum = +displayVal;
         displayVal = operate(operation, firstNum, secondNum);
@@ -58,7 +61,6 @@ function setOperation(sign){
         display.innerHTML = Math.round(displayVal * 10000000000) / 10000000000;
         operation = sign;
         displayVal = null;
-        console.log("other working");
     }
 }
 
@@ -66,5 +68,5 @@ function clear(){
     displayVal = null;
     operation = "";
     // firstNum = 0;
-    // secondNum = 0;
+    secondNum = 0;
 }
